@@ -14,19 +14,19 @@ script:
 
 # Deploy build artifacts. Travis does not invoke this step for pull request builds
 deploy:
-  # Publish release artifacts to the npm repository
-  - provider: npm
-    email: $NPM_EMAIL
-    api_key: $NPM_API_KEY
-    skip_cleanup: true
-    on:
-      tags: true
-  # Create the npm tarball, extract, and publish files to Artifactory for tagged release builds
-  - provider: script
-    script: ./travis/publishToArtifactory.sh
-    skip_cleanup: true
-    on:
-      tags: true
+#  # Publish release artifacts to the npm repository
+#  - provider: npm
+#    email: $NPM_EMAIL
+#    api_key: $NPM_API_KEY
+#    skip_cleanup: true
+#    on:
+#      tags: true
+#  # Create the npm tarball, extract, and publish files to Artifactory for tagged release builds
+#  - provider: script
+#    script: ./travis/publishToArtifactory.sh
+#    skip_cleanup: true
+#    on:
+#      tags: true
   # Create CHANGELOG.md in the current directory
   - provider: script
     script: ./travis/changelog.sh >> CHANGELOG.md
@@ -36,7 +36,10 @@ deploy:
   # Create a GitHub release and publish CHANGELOG.md to the release assets
   - provider: releases
     api_key: $GITHUB_API_KEY
-    file: CHANGELOG.md
+    file_glob: true
+    file:
+      - "CHANGELOG.md"
+      - "dist/**"
     skip_cleanup: true
     on:
       tags: true
