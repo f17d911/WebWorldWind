@@ -37,6 +37,8 @@ deploy:
   - provider: script
     script: ./travis/prepareDistFolderForPublishing.sh
     skip_cleanup: true
+    on:
+      tags: true
   # Create a GitHub release and publish CHANGELOG.md to the release assets
   - provider: releases
     api_key: $GITHUB_API_KEY
