@@ -42,6 +42,7 @@ deploy:
   # Create a GitHub release and publish CHANGELOG.md and zip file to the release assets
   - provider: releases
     api_key: $GITHUB_API_KEY
+    file_globe: true
     file:
       - WebWorldWind-*.zip
       - CHANGELOG.md
