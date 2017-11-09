@@ -21,13 +21,13 @@ deploy:
     skip_cleanup: true
     on:
       branch: develop
-  # Publish release artifacts to the npm repository
-  - provider: npm
-    email: $NPM_EMAIL
-    api_key: $NPM_API_KEY
-    skip_cleanup: true
-    on:
-      tags: true
+  # # Publish release artifacts to the npm repository
+  # - provider: npm
+  #   email: $NPM_EMAIL
+  #   api_key: $NPM_API_KEY
+  #   skip_cleanup: true
+  #   on:
+  #     tags: true
   # Create the npm tarball, extract, and publish files to Artifactory for tagged release builds
   - provider: script
     script: ./travis/publishToArtifactory.sh
