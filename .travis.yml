@@ -43,7 +43,9 @@ deploy:
   - provider: releases
     api_key: $GITHUB_API_KEY
     file_glob: true
-    file: WebWorldWind*.zip
+    file:
+      - WebWorldWind*.zip
+      - CHANGELOG.md
     skip_cleanup: true
     on:
       tags: true
