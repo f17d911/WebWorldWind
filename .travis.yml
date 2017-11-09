@@ -35,7 +35,7 @@ deploy:
       tags: true
   # Create the distribution zip file
   - provider: script
-    script: ./travis/prepareDistFolderForPublishing.sh
+    script: npm run dist
     skip_cleanup: true
     on:
       tags: true
@@ -43,7 +43,7 @@ deploy:
   - provider: releases
     api_key: $GITHUB_API_KEY
     file:
-      - dist/WebWorldWind.zip
+      - WebWorldWind-*.zip
       - CHANGELOG.md
     skip_cleanup: true
     on:

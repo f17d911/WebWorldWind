@@ -7,6 +7,8 @@
  */
 module.exports = function (grunt) {
     grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+
         jsdoc: {
             dist: {
                 src: ['src'],
@@ -64,17 +66,28 @@ module.exports = function (grunt) {
 
         clean: [
             'dist/',
-            'test-results/'
+            'test-results/',
+            'WebWorldWind-*.zip'
         ],
 
         compress: {
-            main: {
+            images: {
                 options: {
                     archive: 'dist/images.zip'
                 },
                 files: [
                     {src: ['images/**']}
                 ]
+            },
+            dist: {
+                options: {
+                    archive: 'WebWorldWind-<%= pkg.version %>.zip'
+                },
+                files: [{
+                    expand: true,
+                    cwd: 'dist/',
+                    src: ['**/*']
+                }]
             }
         },
 
@@ -109,5 +122,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-jsdoc');
     grunt.loadNpmTasks('grunt-karma');
 
-    grunt.registerTask('default', ['clean', 'karma', 'jsdoc', 'requirejs', 'compress', 'copy']);
+    grunt.registerTask('default', ['clean', 'karma', 'jsdoc', 'requirejs', 'copy', 'compress:images']);
+    grunt.registerTask('dist', ['default', 'compress:dist']);
 };
