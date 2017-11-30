@@ -16,7 +16,7 @@ script:
 deploy:
   # Publish release distributions to the Artifactory repository
   - provider: script
-    script: echo ${TRAVIS_TAG#"v"}
+    script: echo "${TRAVIS_TAG#"v"}"
     skip_cleanup: true
     on:
       tags: true
